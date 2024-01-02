@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from Forms import CreateUserForm, CreateCustomerForm
 import shelve, User, Customer
 
-app = Flask(__name__,static_url_path='/CSS')
+app = Flask(__name__,static_url_path='/Static')
 
 @app.route('/')
 def home():
