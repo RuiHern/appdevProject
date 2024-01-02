@@ -5,17 +5,67 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color:#F9AF58;
+}
+#homepagebody{
+    align-items: center;
+    width:350px;
+    top:250px;
+    margin:auto;
+    margin-top: 150px;
+    color:white;
+}
+#title{
+font-size:60px;
+text-align:center;
+font-weight:800;
+}
+#subtitle{
+margin-top:50px;
+font-size:25px;
+text-align:center;
+font-weight:500;
+}
+#homepagebtn{
+display:flex;
+justify-content: space-between;
+margin-top:50px;
+}
+#getstartedbtn{
+width:225px;
+height:70px;
+border-radius:50px;
+border:20px;
+background-color:#F18204;
+font-weight:700;
+color:white;
+}
+#learnmorebtn{
+font-weight:600;
+width:225px;
+height:70px;
+background: transparent;
+border:transparent;
+color:white;
+}
 #header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: #E3963E;
+    background: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     z-index: 999;
     position: sticky;
     top: 0;
     left: 0;
+    margin-top:30px;
+    margin-left:25px;
+    margin-right:25px;
+    border-radius: 100px;
+    border-left:150px;
+    border-right:150px;
 }
 #navbar {
     display: flex;
