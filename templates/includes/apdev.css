@@ -6,7 +6,7 @@
     box-sizing: border-box;
     font-family: 'roboto',sans-serif;
 }
-#header {
+#head {
     display: flex;
     align-items: center;
     justify-content: space-between;
