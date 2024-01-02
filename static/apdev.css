@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: #ff7f50;
+    background: #E3963E;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     z-index: 999;
     position: sticky;
@@ -105,10 +105,11 @@
     text-align: center;
     margin: 20px 10px;
     font-weight:bold;
-    border: 2px solid #ff7f50;
+    border: 2px solid #E3963E;
     background: white;
-    border-radius:5px
+    border-radius:25px;
     color: black;
+
 }
 #registerbtnNav{
     color: white;
