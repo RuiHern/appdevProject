@@ -99,25 +99,28 @@
 }
 
 #loginbtnNav{
-    position: relative;
-    width:150px;
-    padding: 15px 0;
-    text-align: center;
-    margin: 20px 10px;
-    font-weight:bold;
-    border: 2px solid #E3963E;
-    background: white;
-    border-radius:25px;
+    position:relative;
     color: black;
+    width:150px;
+    height:40px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+    background-color: white;
+    border-radius: 25px;
+    border-color: orange;
 
 }
 #registerbtnNav{
+    position:relative;
     color: white;
+    width:150px;
+    height:40px;
     font-size: 16px;
     font-weight: 600;
     padding: 10px;
     background-color: orange;
-    border-radius: 5px;
+    border-radius: 25px;
     border-color: orange;
 
 }
