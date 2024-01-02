@@ -63,5 +63,5 @@ def create_customer():
     return render_template('createCustomer.html', form=create_customer_form)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
