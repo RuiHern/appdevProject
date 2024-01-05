@@ -2,6 +2,7 @@
 {% block title %} MonsterBob - Create Account{% endblock %}
 {% from "includes/_formHelper.html" import render_field %}
 {% block content %}
+<form method="post" action="">
 <div class="column is-4 is-offset-4">
     <h3 class="title">Sign Up</h3>
     <div class="box">
@@ -25,8 +26,9 @@
                 </div>
             </div>
 
-            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+            <button type="submit" value="submit" class="btn btn-primary"></button>
         </form>
     </div>
 </div>
+    </form>
 {% endblock %}

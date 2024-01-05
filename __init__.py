@@ -35,7 +35,7 @@ def create_user():
 
         db.close()
 
-        return redirect(url_for('home'))
+        return redirect(url_for('base'))
     return render_template('createUser.html', form=create_user_form)
 
 @app.route('/createCustomer', methods=['GET', 'POST'])
