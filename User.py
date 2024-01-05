@@ -3,13 +3,13 @@ class User:
     count_id = 0
 
     # initializer method
-    def __init__(self, first_name, last_name,email):
+    def __init__(self, first_name, last_name,email,password):
         User.count_id += 1
         self.__user_id = User.count_id
         self.__first_name = first_name
         self.__last_name = last_name
         self.__email = email
-        # self.__password = ""
+        self.__password = password
 
 
     # accessor methods
