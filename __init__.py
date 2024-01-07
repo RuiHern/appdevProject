@@ -14,14 +14,14 @@ def home():
 def contact_us():
     return render_template('contactUs.html')
 
-@app.route('/createUser', methods=['GET', 'POST'])
-def create_user():
+@app.route('/createCustomer', methods=['GET', 'POST'])
+def create_customer():
     create_user_form = CreateUserForm(request.form)
     if request.method == 'POST' and create_user_form.validate():
-        user = User(create_user_form.first_name.data, create_user_form.last_name.data,create_user_form.email.data,create_user_form.password.data)
-        add_user(user)
-        print(user.get_first_name(), user.get_last_name(), "was stored in user.db successfully with user_id ==",
-              user.get_user_id())
+        customer = User(create_user_form.first_name.data, create_user_form.last_name.data,create_user_form.email.data,create_user_form.password.data)
+        add_user(customer)
+        print(customer.get_first_name(), customer.get_last_name(), "was stored in customer.db successfully with user_id ==",
+              customer.get_user_id())
 
         return redirect(url_for('retrieveCustomers'))
     return render_template('createCustomer.html', form=create_user_form)
