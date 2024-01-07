@@ -16,3 +16,7 @@ class CreateCustomerForm(Form):
     address = TextAreaField('Mailing Address', [validators.length(max=200), validators.DataRequired()])
     membership = RadioField('Membership', choices=[('F', 'Fellow'), ('S', 'Senior'), ('P', 'Professional')], default='F')
     remarks = TextAreaField('Remarks', [validators.Optional()])
+
+class logininformation(Form):
+    email2 = EmailField('Email', [validators.Email(), validators.DataRequired()])
+    password2 = PasswordField('Password', [validators.length(min=5, max=15), validators.data_required()])

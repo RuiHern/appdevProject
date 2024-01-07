@@ -1,5 +1,7 @@
 from User import User
 import shelve
+
+
 def get_key(my_dict):
     if len(my_dict)==0:
         my_key = 1
@@ -15,7 +17,7 @@ def add_user(user):
         print("Error in retrieving Users from user.db.")
 
     user.set_user_id(get_key(users_dict))
-    users_dict[user.get_user_id()] = user
+    users_dict[user.get_email()] = user
     db['Users'] = users_dict
     # Test codes
     db.close()
@@ -50,5 +52,8 @@ def save_customer(customer):
     customers_dict[customer.get_user_id()] = customer
     db['Customers'] = customers_dict
     db.close()
+
+
+
 if __name__ == '__main__':
     display_allUsers()

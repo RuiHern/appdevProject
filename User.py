@@ -1,4 +1,5 @@
 # User class
+import shelve
 class User:
     count_id = 0
 
@@ -40,3 +41,23 @@ class User:
         self.__email = email
     def set_password(self,password):
         self.__password = password
+
+class logincheck:
+    def __init__(self,email2,password2):
+        User.count_id += 1
+
+        self.__email2 = email2
+        self.__password2 = password2
+
+    def logincheckfunc(self):
+        print("fuck this project")
+
+
+    def email_get(self):
+        return self.__email2
+
+    def password_get(self):
+        return self.__password2
+
+    def email_set(self):
+        pass

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Forms import CreateUserForm, CreateCustomerForm
+from Forms import CreateUserForm, CreateCustomerForm , logininformation
 import shelve, Staff
 from db import *
 from User import *
@@ -12,10 +12,16 @@ def home():
 
 @app.route('/login')
 def login():
+    create_login_form = logininformation(request.form)
+    if request.method == 'POST' and create_login_form.validate():
+        check = logincheck(create_login_form.email2.data,create_login_form.password2.data)
+        check.logincheckfunc()
+
     return render_template('login.html')
 @app.route('/contactUs')
 def contact_us():
     return render_template('contactUs.html')
+
 
 @app.route('/createCustomer', methods=['GET', 'POST'])
 def create_customer():
