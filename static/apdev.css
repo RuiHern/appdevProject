@@ -30,7 +30,8 @@ background-color: #04AA6D; /* Green */
 }
 
 body{
-    background-color:#F9AF58;}
+    background-color:#F9AF58;
+}
     
 #footering{
     display: flex;
@@ -48,7 +49,7 @@ body{
     text-align: center;
     color: #fff;
 }
-.footerlink{
+a{
     color: black;
     font-weight: 800;
 }
