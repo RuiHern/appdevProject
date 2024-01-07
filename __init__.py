@@ -71,16 +71,17 @@ def update_user(id):
         db.close()
 
         return redirect(url_for('retrieveCustomers'))
-    # else:
-    #     users_dict = {}
-    #     db = shelve.open('user.db', 'r')
-    #     users_dict = db['Users']
-    #     db.close()
-    #     user = users_dict.get(id)
-    #     update_user_form.first_name.data = user.get_first_name()
-    #     update_user_form.last_name.data = user.get_last_name()
-    #
-    #     return render_template('updateCustomer.html', form=update_user_form)
+    else:
+        users_dict = {}
+        db = shelve.open('user.db', 'r')
+        users_dict = db['Users']
+        db.close()
+        user = users_dict.get(id)
+        update_user_form.first_name.data = user.get_first_name()
+        update_user_form.last_name.data = user.get_last_name()
+        update_user_form.email.data = user.get_email()
+
+        return render_template('updateCustomer.html', form=update_user_form)
 
 if __name__ == '__main__':
     app.run(debug=True)
