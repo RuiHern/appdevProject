@@ -8,7 +8,7 @@ app = Flask(__name__,static_url_path='/static')
 
 @app.route('/')
 def home():
-    return render_template('base.html')
+    return render_template('home.html')
 
 @app.route('/contactUs')
 def contact_us():
@@ -76,6 +76,9 @@ def update_user(id):
         update_user_form.password.data = user.get_password()
 
         return render_template('updateCustomer.html', form=update_user_form)
+# @app.route('login')
+# def login():
+#
 
 
 
