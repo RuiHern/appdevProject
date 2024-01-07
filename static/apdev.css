@@ -9,56 +9,64 @@
     font-family: 'poppins';
     font-size: 15px;
 }
-.smbbtn{
-background-color: blue;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 16px;
-  margin: 4px 2px;
-  opacity: 0.6;
-  transition: 0.3s;
-  display: inline-block;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius:20px;
-}
-.smbbtn:hover{
-background-color: #04AA6D; /* Green */
-  color: white;
+
+.smbbtn {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 20px;
 }
 
-body{
-    background-color:#F9AF58;
+.smbbtn:hover {
+    background-color: #04AA6D;
+    /* Green */
+    color: white;
 }
-    
-#footering{
+
+body {
+    background-color: #F9AF58;
+}
+
+#footering {
     display: flex;
+    background: #333;
+    justify-content: flex-end;
     align-items: flex-end;
-    min-height: -100vh;
-    background-color: #ff6900;
+    min-height: 100vh;
 }
 
-.footer{
+.footer {
     position: relative;
     width: 100%;
-    background: #ff6900;
+    background: #FF6900;
     min-height: 100px;
-    padding: 3% 5%;
-    text-align: center;
-    color: #fff;
-}
-a{
+      padding: 3% 5%;
+      text-align: center;
+      color: #fff;
+    }
+
+a {
     color: #fff;
     font-weight: 800;
 }
-.logo a{
+
+.logo a {
     font-size: 30px;
+    color: #fff;
     font-weight: 600;
-    margin: 22px 0;  
+    margin: 20px 0;
 }
-.wave{
+
+.wave {
     position: absolute;
     top: -100px;
     left: 0;
@@ -67,64 +75,77 @@ a{
     background: url(wave.svg);
     background-size: 1000px 100px;
 }
-.wave:nth-of-type(1){
+
+.wave:nth-of-type(1) {
     z-index: 1000;
     opacity: 1;
     bottom: 0;
     animation: anim 4s linear infinite !important;
 }
-.wave:nth-of-type(2){
+
+.wave:nth-of-type(2) {
     z-index: 999;
     opacity: 0.5;
     bottom: 10px;
     animation: anim2 4s linear infinite !important;
 }
-.wave:nth-of-type(3){
+
+.wave:nth-of-type(3) {
     z-index: 1000;
     opacity: 0.2;
     bottom: 15px;
     animation: anim 3s linear infinite !important;
 }
-.wave:nth-of-type(4){
+
+.wave:nth-of-type(4) {
     z-index: 999;
     opacity: 0.7;
     bottom: 20px;
     animation: anim2 3s linear infinite !important;
 }
-@keyframes anim{
-    0%{
-        background-position-x:1000px ;
+
+@keyframes anim {
+    0% {
+        background-position-x: 1000px;
     }
-    100%{
-        background: position x 0px; ;
-    }
-}
-@keyframes anim2{
-    0%{
-        background-position-x: -1000px ;
-    }
-    100%{
-        background: position x 0px; ;
+
+    100% {
+        background: position x 0px;
+        ;
     }
 }
-.row{
+
+@keyframes anim2 {
+    0% {
+        background-position-x: -1000px;
+    }
+
+    100% {
+        background: position x 0px;
+        ;
+    }
+}
+
+.row {
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
     text-align: start;
-    margin-bottom: 30px;
-    background-color:#ff6900 ;
+    margin-bottom: 20px;
 }
-.row .col{
+
+.row .col {
     width: 25%;
 
 }
-.social{
+
+.social {
     display: flex;
     gap: 20px;
 }
-.social li{
+
+.social li {
     height: 44px;
     width: 44px;
     border: 1px solid #fff;
@@ -132,67 +153,78 @@ a{
     transition: .6s;
     position: relative;
 }
-.social li i{
+
+.social li i {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size:18px;
+    font-size: 18px;
     transition: .6s;
 }
-.social li:hover{
+
+.social li:hover {
     background-color: #fff;
     cursor: pointer;
     transform: translateY(-5px);
 }
-.social li:hover i{
+
+.social li:hover i {
     color: #ff6900;
 }
-#titlelogo{
-font-weight:800;
-font-size:45px;
+
+#titlelogo {
+    font-weight: 800;
+    font-size: 45px;
 }
-#homepagebody{
+
+#homepagebody {
     align-items: center;
-    width:350px;
-    top:250px;
-    margin:auto;
+    width: 350px;
+    top: 250px;
+    margin: auto;
     margin-top: 150px;
-    color:white;
+    color: white;
 }
-#title{
-font-size:60px;
-text-align:center;
-font-weight:800;
+
+#title {
+    font-size: 60px;
+    text-align: center;
+    font-weight: 800;
 }
-#subtitle{
-margin-top:50px;
-font-size:25px;
-text-align:center;
-font-weight:500;
+
+#subtitle {
+    margin-top: 50px;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 500;
 }
-#homepagebtn{
-display:flex;
-justify-content: space-between;
-margin-top:50px;
+
+#homepagebtn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
 }
-#getstartedbtn{
-width:225px;
-height:70px;
-border-radius:50px;
-border:20px;
-background-color:#F18204;
-font-weight:700;
-color:white;
+
+#getstartedbtn {
+    width: 225px;
+    height: 70px;
+    border-radius: 50px;
+    border: 20px;
+    background-color: #F18204;
+    font-weight: 700;
+    color: white;
 }
-#learnmorebtn{
-font-weight:600;
-width:225px;
-height:70px;
-background: transparent;
-border:transparent;
-color:white;
+
+#learnmorebtn {
+    font-weight: 600;
+    width: 225px;
+    height: 70px;
+    background: transparent;
+    border: transparent;
+    color: white;
 }
+
 #header {
     display: flex;
     align-items: center;
@@ -204,13 +236,14 @@ color:white;
     position: sticky;
     top: 0;
     left: 0;
-    margin-top:30px;
-    margin-left:25px;
-    margin-right:25px;
+    margin-top: 30px;
+    margin-left: 25px;
+    margin-right: 25px;
     border-radius: 100px;
-    border-left:150px;
-    border-right:150px;
+    border-left: 150px;
+    border-right: 150px;
 }
+
 #navbar {
     display: flex;
     align-items: center;
@@ -292,11 +325,11 @@ color:white;
     left: 20px;
 }
 
-#loginbtnNav{
-    position:relative;
+#loginbtnNav {
+    position: relative;
     color: black;
-    width:150px;
-    height:40px;
+    width: 150px;
+    height: 40px;
     font-size: 16px;
     font-weight: 600;
     padding: 10px;
@@ -305,11 +338,12 @@ color:white;
     border-color: orange;
 
 }
-#registerbtnNav{
-    position:relative;
+
+#registerbtnNav {
+    position: relative;
     color: white;
-    width:150px;
-    height:40px;
+    width: 150px;
+    height: 40px;
     font-size: 16px;
     font-weight: 600;
     padding: 10px;
@@ -318,6 +352,7 @@ color:white;
     border-color: orange;
 
 }
+
 #coverimg {
     width: 100%;
     height: 500px;
@@ -325,11 +360,13 @@ color:white;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .5);
 }
+
 div {
     display: block;
 }
+
 .homesection1 {
     background-color: #E7E7ED;
     display: grid;
@@ -339,6 +376,7 @@ div {
     padding-top: 8%;
     padding-bottom: 8%;
 }
+
 .homesection2 {
     background-color: white;
     display: grid;
@@ -348,6 +386,7 @@ div {
     padding-top: 8%;
     padding-bottom: 8%;
 }
+
 .homesection3 {
     background-color: #E7E7ED;
     display: grid;
@@ -357,6 +396,7 @@ div {
     padding-top: 8%;
     padding-bottom: 8%;
 }
+
 .homesection4 {
     background-color: white;
     display: grid;
@@ -366,11 +406,13 @@ div {
     padding-top: 8%;
     padding-bottom: 8%;
 }
+
 .logo {
     margin-bottom: 30px;
 }
+
 /*Footer */
-footer{
+footer {
     position: relative;
     width: 100%;
     background-color: #3586ff;
@@ -382,12 +424,11 @@ footer{
     flex-direction: column;
     margin-top: 100px;
     max-height: 200px;
-    
+
 }
 
 footer .social_icon,
-footer .menufoot
-{
+footer .menufoot {
     position: relative;
     display: flex;
     justify-content: center;
@@ -396,24 +437,24 @@ footer .menufoot
 }
 
 footer .social_icon li,
-footer .menufoot li
-{
+footer .menufoot li {
     list-style: none;
 }
 
-footer .social_icon li a{
-    font-size:  2em;
+footer .social_icon li a {
+    font-size: 2em;
     color: #fff;
     margin: 0 10px;
     display: inline-block;
     transition: 0.5s;
 }
-footer .social_icon li a:hover
-{
+
+footer .social_icon li a:hover {
     transform: translateY(-10px);
 }
-footer .menufoot li a{
-    font-size:  1.2em;
+
+footer .menufoot li a {
+    font-size: 1.2em;
     color: #fff;
     margin: 0 10px;
     display: inline-block;
@@ -422,10 +463,11 @@ footer .menufoot li a{
     opacity: 0.75;
 }
 
-footer .menufoot li a:hover{
+footer .menufoot li a:hover {
     opacity: 1;
 }
-footer p{
+
+footer p {
     color: #fff;
     text-align: center;
     margin-top: 15px;
@@ -434,8 +476,7 @@ footer p{
 }
 
 
-footer .wave 
-{
+footer .wave {
     position: absolute;
     top: -100px;
     left: 0;
@@ -443,138 +484,152 @@ footer .wave
     height: 60%;
     background: url(images/wave.png);
     background-size: 1000px 100px;
-    
-    
+
+
 }
 
-footer .wave#wave1{
+footer .wave#wave1 {
     z-index: 1000;
     opacity: 1;
     bottom: 0;
     animation: animateWave 4s linear infinite;
 }
-footer .wave#wave2{
+
+footer .wave#wave2 {
     z-index: 999;
     opacity: 0.5;
     bottom: 10px;
     animation: animateWave_02 4s linear infinite;
 }
-footer .wave#wave3{
+
+footer .wave#wave3 {
     z-index: 1000;
     opacity: 0.2;
     bottom: 15px;
     animation: animateWave 3s linear infinite;
 }
-footer .wave#wave4{
+
+footer .wave#wave4 {
     z-index: 999;
     opacity: 0.7;
     bottom: 20px;
     animation: animateWave_02 3s linear infinite;
 }
+
 /*flip card*/
 .flip-card {
     background-color: transparent;
     width: 100%;
     height: 100%;
-    
-    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+    perspective: 1000px;
+    /* Remove this if you don't want the 3D effect */
     border: 1px solid #f1f1f1;
     border-radius: 25px;
-    
-    
-  }
-  
-  /* This container is needed to position the front and back side */
-  .flip-card-inner {
+
+
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
     position: relative;
     width: 100%;
     height: 100%;
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    
-  }
-  
-  /* Do an horizontal flip when you move the mouse over the flip box container */
-  .flip-card:hover .flip-card-inner {
+
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
-  }
-  
-  /* Position the front and back side */
-  .flip-card-front, .flip-card-back {
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
+    -webkit-backface-visibility: hidden;
+    /* Safari */
     backface-visibility: hidden;
 
-  }
-  
-  /* Style the front side (fallback if image is missing) */
-  .flip-card-front {
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
     background-color: #bbb;
     color: black;
-  }
-  
-  /* Style the back side */
-  .flip-card-back {
+}
+
+/* Style the back side */
+.flip-card-back {
     background-color: dodgerblue;
     color: white;
     transform: rotateY(180deg);
     border: 1px solid #f1f1f1;
     border-radius: 25px;
-  }
-  .row{
+}
+
+.row {
     background-color: #E7E7ED;
     height: 400px;
-  }
-  .column1{
+}
+
+.column1 {
     text-align: center;
     font-size: 2em;
     font-family: 'Times New Roman', Times, serif;
     margin: 60px;
-  }
-  @keyframes animateWave
-{
-    0%{
+}
+
+@keyframes animateWave {
+    0% {
         background-position-x: 1000px;
     }
-    100%{
+
+    100% {
         background-position-x: 0px;
     }
 }
-@keyframes animateWave_02
-{
-    0%{
+
+@keyframes animateWave_02 {
+    0% {
         background-position-x: 0px;
     }
-    100%{
+
+    100% {
         background-position-x: 1000px;
     }
 }
 
-@media (max-width: 858px)
-{
-    footer{
+@media (max-width: 858px) {
+    footer {
         display: none;
     }
 }
-@media(max-width: 952px){
-    label.logo{
+
+@media(max-width: 952px) {
+    label.logo {
         font-size: 30px;
         padding-left: 50px;
 
     }
-    nav ul li a{
+
+    nav ul li a {
         font-size: 16px
     }
 }
-@media (max-width: 858px){
-    .checkbtn{
+
+@media (max-width: 858px) {
+    .checkbtn {
         display: block;
     }
-    ul{
-        position:absolute;
+
+    ul {
+        position: absolute;
         width: 100%;
         height: 100vh;
         background: #2c3e50;
@@ -583,36 +638,43 @@ footer .wave#wave4{
         text-align: center;
         transition: all .5s;
     }
-    nav ul li{
+
+    nav ul li {
         display: block;
         margin: 50px 0;
         line-height: 30px;
 
     }
-    nav ul li{
+
+    nav ul li {
         font-size: 20px;
     }
-    a:hover,a.active{
-        background:none;
+
+    a:hover,
+    a.active {
+        background: none;
         color: #0082e6;
     }
-    #check:checked ~ ul{
+
+    #check:checked~ul {
         left: 0;
-        
-        
+
+
     }
-    .mainmenu{
+
+    .mainmenu {
         height: 30px;
         width: 30px;
         float: right;
         display: block;
         margin-top: 20px;
     }
-    #covertext{
+
+    #covertext {
         text-indent: 100000%;
         white-space: nowrap;
         overflow: hidden;
         display: none;
     }
-    
+
 }
