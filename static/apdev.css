@@ -18,6 +18,7 @@ background-color: blue;
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  border-radius:20px;
 }
 .smbbtn:hover{
 background-color: #04AA6D; /* Green */
