@@ -16,7 +16,9 @@ def login():
     if request.method == 'POST' and create_login_form.validate():
         check = logincheck(create_login_form.email2.data,create_login_form.password2.data)
         check.logincheckfunc()
-
+    else:
+        check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
+        check.logincheckfunc()
     return render_template('login.html')
 @app.route('/contactUs')
 def contact_us():
