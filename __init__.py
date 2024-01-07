@@ -10,6 +10,9 @@ app = Flask(__name__,static_url_path='/static')
 def home():
     return render_template('home.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
 @app.route('/contactUs')
 def contact_us():
     return render_template('contactUs.html')
