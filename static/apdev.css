@@ -30,11 +30,14 @@ background-color: #04AA6D; /* Green */
 }
 
 body{
-    background-color:#F9AF58;
+    background-color:#F9AF58;}
+    
+#footering{
     display: flex;
     align-items: flex-end;
     min-height: -100vh;
 }
+
 .footer{
     position: relative;
     width: 100%;
