@@ -54,7 +54,8 @@ class logincheck:
     def logincheckfunc(self):
         print("it means its works!!!!! you hear that yishun~~!!!!!!!! bob")
 
-
+    def logincheckfunc2(self):
+        print("it means its works!!!!! you hear that yishun~~!!!!!!!! bob22222222")
     def email_get(self):
         return self.__email2
 

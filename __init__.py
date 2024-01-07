@@ -15,11 +15,15 @@ def login():
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
         check = logincheck(create_login_form.email2.data,create_login_form.password2.data)
-        check.logincheckfunc()
+        check.logincheckfunc2()
+        return redirect(url_for('createCustomer'))
     else:
         check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
         check.logincheckfunc()
-    return render_template('login.html')
+    return render_template('login.html', form=create_login_form)
+
+
+
 @app.route('/contactUs')
 def contact_us():
     return render_template('contactUs.html')
