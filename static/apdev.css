@@ -6,9 +6,22 @@
     box-sizing: border-box;
 }
 .smbbtn{
-width:100px;
-font-size:40px;
-color:orange;
+background-color: blue;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+.smbbtn:hover{
+background-color: #04AA6D; /* Green */
+  color: white;
 }
 
 body{
