@@ -8,6 +8,55 @@ app = Flask(__name__,static_url_path='/static')
 def home():
     return render_template('base.html')
 
+@app.route('/deleteCustomer/<int:id>', methods=['POST'])
+def deleteCustomer(id):
+    users_dict = {}
+    db = shelve.open('user.db','w')
+    users_dict = db['Users']
+    users_dict.pop(id)
+    db['Users'] = users_dict
+    db.close()
+    return redirect(url_for('retrieveCustomers'))
+
+@app.route('/updateCustomer/<int:id>/', methods=['GET', 'POST'])
+def updateCustomer(id):
+    update_user_form = CreateUserForm(request.form)
+    if request.method == 'POST' and update_user_form.validate():
+        users_dict = {}
+        db = shelve.open('user.db', 'w')
+        users_dict = db['Users']
+        user = users_dict.get(id)
+        user.set_first_name(update_user_form.first_name.data)
+        user.set_last_name(update_user_form.last_name.data)
+        user.set_email(update_user_form.email.data)
+        db['Users'] = users_dict
+        db.close()
+        return redirect(url_for('retrieve_users'))
+    else:
+        users_dict = {}
+        db = shelve.open('user.db', 'r')
+        users_dict = db['Users']
+        db.close()
+        user = users_dict.get(id)
+        update_user_form.first_name.data = user.get_first_name()
+        update_user_form.last_name.data = user.get_last_name()
+        update_user_form.email.data = user.get_email()
+        return render_template('updateUser.html', form=update_user_form)
+
+
+@app.route('/retrieveCustomers')
+def retrieveCustomers():
+    users_dict = {}
+    db = shelve.open('user.db', 'r')
+    users_dict = db['Users']
+    db.close()
+
+    users_list = []
+    for key in users_dict:
+        user = users_dict.get(key)
+    users_list.append(user)
+
+    return render_template('retrieveCustomers.html', count=len(users_list), users_list=users_list)
 @app.route('/contactUs')
 def contact_us():
     return render_template('contactUs.html')
@@ -27,12 +76,6 @@ def create_user():
         user = User.User(create_user_form.first_name.data, create_user_form.last_name.data,create_user_form.email.data,create_user_form.password.data)
         users_dict[user.get_user_id()] = user
         db['Users'] = users_dict
-
-        # Test codes
-        users_dict = db['Users']
-        user = users_dict[user.get_user_id()]
-        print(user.get_first_name(), user.get_last_name(), "was stored in user.db successfully with user_id ==", user.get_user_id())
-
         db.close()
 
         return redirect(url_for('home'))
@@ -59,7 +102,7 @@ def create_customer():
 
         db.close()
 
-        return redirect(url_for('home'))
+        return redirect(url_for('retrieveCustomers'))
     return render_template('createCustomer.html', form=create_customer_form)
 
 if __name__ == '__main__':
