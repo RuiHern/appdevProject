@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Forms import CreateUserForm, CreateCustomerForm , logininformation
+from Forms import CreateUserForm , logininformation
 import shelve, Staff
 from db import *
 from User import *
@@ -24,16 +24,16 @@ def login():
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
         customer = logincheck(request.form['email'], request.form['password'])
-        customer.email_set(request.form['email'])
-        print(customer.email_get())
+
         users_dict = {}
         db = shelve.open('user.db', 'r')
         users_dict = db['Users']
 
-        if customer.email_get()  in users_dict:
-            # if customer.password_get() = user_dict
-            print(users_dict)
-
+        if customer.email_get() in users_dict:
+            print('pass1')
+            user = users_dict.get(customer.email_get())
+            if customer.password_get() == user.get_password():
+                return redirect(url_for('retrieveCustomers'))
             db.close()
     return render_template('login.html', form=create_login_form)
 
