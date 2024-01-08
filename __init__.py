@@ -41,6 +41,10 @@ def login():
 def contact_us():
     return render_template('contactUs.html')
 
+@app.route('/viewproject')
+def view_project():
+    return render_template('viewproject.html')
+
 #Project Creation
 @app.route('/ProjectCreation')
 def contact_us():
