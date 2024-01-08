@@ -1,9 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for
-from Forms import CreateUserForm, CreateCustomerForm , logininformation
+import os
+import sys
+
+from flask import Flask, render_template, request, redirect, url_for,request,flash
+from Forms import CreateUserForm, CreateCustomerForm, logininformation, DocumentUploadForm
 import shelve, Staff
 from db import *
 from User import *
+import json
 
+
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField
+from werkzeug.utils import secure_filename
 app = Flask(__name__,static_url_path='/static')
 
 @app.route('/')
@@ -102,13 +110,31 @@ def update_user(id):
 # def login():
 #
 
-@app.route('/CreateForum.html', methods=['GET', 'POST'])
-def CreateForum():
-    users_dict = {}
-    db = shelve.open('user.db', 'r')
-    users_dict = db['Users']
-    db.close()
 
+
+
+
+@app.route('/CreateForum', methods=['POST', 'GET'])
+def CreateForum():
+    form = DocumentUploadForm()
+    if form.validate():
+
+        print("IT Works")
+
+        Upload = os.path.join(
+            os.path.dirname(app.instance_path), 'assets'
+        )
+        f = form.profile.data
+
+        filename = secure_filename(f.filename)
+
+        f.save(os.path.join(Upload, 'profile', filename))
+
+        flash('Document uploaded successfully.')
+
+        return redirect(url_for('home'))
+
+    return render_template('CreateForum.html', form=form)
 
 
 if __name__ == '__main__':

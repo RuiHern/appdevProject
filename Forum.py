@@ -1,5 +1,9 @@
-import django as django
+from User import User
 
-django-admin startproject DataFlair_discsnForum
-cd DataFlair_discusnForum
-django-admin startapp Discussion_Forum
+class Forum(User):
+    Count_ID = 0
+    def __init__(self,Name,Comment,Photo):
+        super().__init__(Name)
+        Forum.count_id += 1
+        self.Comment = Comment
+        self.Photo = Photo
