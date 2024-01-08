@@ -55,6 +55,7 @@ class logincheck:
 
     def logincheckfunc2(self):
         print("it means its works!!!!! you hear that yishun~~!!!!!!!! bob22222222")
+
     def email_get(self):
         return self.__email2
 
@@ -64,3 +65,27 @@ class logincheck:
     def email_set(self):
         pass
 
+
+class blog(User):
+    def __init__(self, Name, Comment, File):
+        self.__name = Name
+        self.__comment = Comment
+        self.__file = File
+
+    def get_Name(self):
+        return self.__name
+
+    def get_Comment(self):
+        return self.__comment
+
+    def get_File(self):
+        return self.__file
+
+    def set(self, name):
+        self.__name = name
+
+    def set(self, comment):
+        self.__comment = comment
+
+    def set(self, file):
+        self.__file = file
