@@ -3,13 +3,13 @@ import User
 class Staff(User.User):
     count_id = 0
 
-    def __init__(self, first_name, last_name,email, address,staffrole,password):
+    def __init__(self, first_name, last_name,email, address,password):
         super().__init__(first_name,last_name,email)
         Staff.count_id += 1
         self.__staff_id = Staff.count_id
         self.__email = email
         self.__address = address
-        self.__staffrole = staffrole
+        # self.__staffrole = staffrole
         self.__password = password
 
     # accessor methods
