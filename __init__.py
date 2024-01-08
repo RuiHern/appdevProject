@@ -3,8 +3,13 @@ from Forms import *
 from Staff import Staff
 from User import *
 from db import *
+from werkzeug.utils import *
+import os
+
 
 app = Flask(__name__,static_url_path='/static')
+app.config['SECRET_KEY'] = 'supersecretkey'
+app.config['UPLOAD_fOLDER'] = 'static/files'
 
 @app.route('/')
 def home():
@@ -21,7 +26,6 @@ def login():
     #     check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
     #     check.logincheckfunc()
     # return render_template('login.html', form=create_login_form)
-    print("bobby")
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
         customer = logincheck(request.form['email'],logininformation.password.data)
@@ -37,12 +41,28 @@ def login():
 def contact_us():
     return render_template('contactUs.html')
 
+#Project Creation
+@app.route('/ProjectCreation')
+def contact_us():
+    return render_template('ProjectCreation.html')
+
+@app.route('/createProject', methods=['GET', 'POST'])
+def create_project():
+    create_project = CreateProject(request.form)
+    if request.method == 'POST' and create_project.validate():
+        Project = User(create_project.first_name.data, create_project.last_name.data,create_project.email.data,create_project.address.data
+                    ,create_project.house_type.data, create_project.house_theme.data, create_project.house_images.data, create_project.comments.data )
+        add_project(Project)
+        
+
+        return redirect(url_for('retrieveProject'))
+    return render_template('createProject.html', form=create_project)
 
 @app.route('/createStaff', methods=['GET', 'POST'])
 def create_staff():
     create_staff_form = CreateStaffForm(request.form)
     if request.method == 'POST' and create_staff_form.validate():
-        staff = Staff(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.address.data,create_staff_form.role.data,create_staff_form.password.data)
+        staff = Staff(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.password.data)
         add_staff(staff)
         print(staff.get_first_name(), staff.get_last_name(), "was stored in customer.db successfully with staff_id ==",
               staff.get_user_id())
@@ -84,7 +104,7 @@ def update_staff(id):
         staff.set_first_name(update_staff_form.first_name.data)
         staff.set_last_name(update_staff_form.last_name.data)
         staff.set_email(update_staff_form.email.data)
-        staff.set_date_joined(update_staff_form.address.data)
+        staff.set_password(update_staff_form.password.data)
         db['Staff'] = staff_dict
         db.close()
         return redirect(url_for('retrieveStaff'))
@@ -170,13 +190,21 @@ def update_user(id):
 
 @app.route('/CreateForum.html', methods=['GET', 'POST'])
 def CreateForum():
+    
     users_dict = {}
     db = shelve.open('user.db', 'r')
     users_dict = db['Users']
     db.close()
 
+@app.route("/CreateForum" , methods = {'GET','POST'})
+def UploadImage():
+    form = UploadImage()
+    if form.validate_on_submit():
+        file = form.file.data
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
+
+    return render_template("CreateForum.html", form = form)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-

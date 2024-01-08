@@ -4,9 +4,9 @@
 {% block content %}
 <form method="post" action="">
 <div class="column is-4 is-offset-4">
-    <h3 class="title">Sign Up</h3>
+    <h3 class="title">Create Project</h3>
     <div class="box">
-        <form method="POST" action="/signup">
+        <form method="POST" action="/createproject">
             <div class="field">
                 <div class="control">
                     {{render_field(form.first_name, class="form-control")}}
@@ -22,7 +22,36 @@
 
             <div class="field">
                 <div class="control">
-                    {{render_field(form.password, class="form-control")}}
+                    {{render_field(form.phone, class="form-control")}}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{render_field(form.address, class="form-control")}}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{render_field(form.house_type, class="form-control")}}
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    {{render_field(form.house_theme, class="form-control")}}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{render_field(form.house_images, class="form-control")}}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    {{render_field(form.comments, class="form-control")}}
                 </div>
             </div>
 

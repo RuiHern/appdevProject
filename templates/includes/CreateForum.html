@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %} MonsterBob - Create Account{% endblock %}
+{% from "includes/_formHelper.html" import render_field %}
+{% block content %}
+<form method="post" action="">
+    <div class="column is-4 is-offset-4">
+        <h3 class="title">Sign Up</h3>
+        <div class="box">
+            <div class="field">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    {{ render_field(form.Name, class="form-control") }}
+                </div>
+                <div id="prof">
+                    <div class="form-group">
+                        {{ render_field(form.Comment, class="form-control") }}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6 form-group">
+                <label>Profile Image</label>
+                <input type="file" name="profile" class="form-control-file">
+            </div>
+
+
+            <button type="submit" value="submit" class="smbbtn">Submit</button>
+
+        </div>
+    </div>
+</form>
+
+<script>  new FroalaEditor('.selector', {    // Set the image upload URL.    imageUploadURL: '/upload_image'  })
+
+
+
+</script>
+{% endblock %}
