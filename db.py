@@ -13,13 +13,13 @@ def add_staff(staff):
     staff_dict = {}
     db = shelve.open('staff.db', 'c')
     try:
-        staff_dict = db['Staff']
+        users_dict = db['staff']
     except:
-        print("Error in retrieving staff from staff.db.")
+        print("Error in retrieving Users from user.db.")
 
-    staff.set_user_id(get_key(staff_dict))
-    staff_dict[staff.get_email()] = staff
-    db['Staff'] = staff_dict
+    staff.set_user_id(get_key(users_dict))
+    users_dict[staff.get_email()] = staff
+    db['Staff'] = users_dict
     # Test codes
     db.close()
 def add_user(user):
