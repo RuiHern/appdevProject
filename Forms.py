@@ -18,5 +18,5 @@ class CreateCustomerForm(Form):
     remarks = TextAreaField('Remarks', [validators.Optional()])
 
 class logininformation(Form):
-    email = EmailField('Email', [validators.Email(), validators.DataRequired()])
-    password = PasswordField('Password', [validators.length(min=5, max=15), validators.data_required()])
+    email2 = EmailField('Email', [validators.Email(), validators.DataRequired()])
+    password2 = PasswordField('Password', [validators.length(min=5, max=15), validators.data_required()])
