@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Forms import CreateUserForm, CreateCustomerForm , logininformation
+from Forms import CreateUserForm, CreateStaffForm , logininformation
 import shelve, Staff
 from db import *
 from User import *
@@ -10,6 +10,32 @@ app = Flask(__name__,static_url_path='/static')
 def home():
     return render_template('home.html')
 
+
+@app.route('/createStaff', methods=['GET', 'POST'])
+def create_staff():
+    create_staff_form = CreateStaffForm(request.form)
+    if request.method == 'POST' and create_staff_form.validate():
+        staff = Staff(create_staff_form.first_name.data,create_staff_form.last_name.data,create_staff_form.gender.data,create_staff_form.email.data,create_staff_form.date_joined.data,create_staff_form.address.data,create_staff_form.membership.data,create_staff_form.remarks.data,create_staff_form.password.data )
+        add_staff(staff)
+        print(staff.get_first_name(), staff.get_last_name(), "was stored in staff.db successfully with user_id ==",
+              staff.get_staff_id())
+
+        return redirect(url_for('retrieveStaff'))
+    return render_template('createStaff.html', form=create_staff_form)
+
+@app.route('/retrieveStaff')
+def retrieveStaff():
+    staff_dict = {}
+    db = shelve.open('staff.db', 'r')
+    staff_dict = db['staff']
+    db.close()
+
+    staff_list = []
+    for key in staff_dict:
+        staff = staff_dict.get(key)
+        staff_list.append(staff)
+
+    return render_template('retrieveStaff.html', count=len(staff_list), users_list=staff_list)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # create_login_form = logininformation(request.form)
