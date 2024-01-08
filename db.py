@@ -1,4 +1,3 @@
-from User import User
 import shelve
 
 
@@ -31,20 +30,6 @@ def add_user(user):
         print("Error in retrieving Users from user.db.")
 
     user.set_user_id(get_key(users_dict))
-    users_dict[user.get_email()] = user
-    db['Users'] = users_dict
-    # Test codes
-    db.close()
-
-def add_project(Project):
-    users_project = {}
-    db = shelve.open('projectdb', 'c')
-    try:
-        project_dict = db['Project']
-    except:
-        print("Error in retrieving Users from user.db.")
-
-    Project.set_user_id(get_key(users_dict))
     users_dict[user.get_email()] = user
     db['Users'] = users_dict
     # Test codes

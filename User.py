@@ -1,5 +1,4 @@
 # User class
-import shelve
 class User:
     count_id = 0
 
@@ -65,47 +64,3 @@ class logincheck:
     def email_set(self):
         pass
 
-class Project(User):
-    def __init__(self, first_name, last_name, email, phone,address, house_type, house_images, house_theme, comments, password):
-        super().__init__(first_name, last_name, email)
-        self.__phone = phone
-        self.__house_type = house_type
-        self.__house_theme = house_theme
-        self.__house_images = house_images
-        self.__address = address
-        self.__comments = comments
-
-    def get_phone(self):
-        return self.__phone
-
-    def get_address(self):
-        return self.__address
-
-    def get_house_type(self):
-        return self.__house_type
-
-    def get_house_theme(self):
-        return self.__house_theme
-
-    def get_house_images(self):
-        return self.__house_images
-    def get_comments(self):
-        return self.__comments
-
-    def set_phone(self,phone):
-        self.__phone = phone
-    
-    def set_address(self,address):
-         self.__address = address
-    
-    def set_house_type(self,house_type):
-        self.__house_type = house_type
-    
-    def set_house_image(self,house_images):
-        self.__house_images = house_images
-
-    def set_house_theme(self,house_theme):
-         self.__house_theme = house_theme
-
-    def set_comments(self,comments):
-         self.__comments = comments
