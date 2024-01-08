@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Forms import *
-import shelve, Staff
-from db import *
+from Staff import Staff
 from User import *
+from db import *
 
 app = Flask(__name__,static_url_path='/static')
 
@@ -41,9 +41,9 @@ def contact_us():
 def create_staff():
     create_staff_form = CreateStaffForm(request.form)
     if request.method == 'POST' and create_staff_form.validate():
-        staff = User(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.gender.data,create_staff_form.email.data,create_staff_form.address.data,create_staff_form.membership.data,create_staff_form.remarks.data,create_staff_form.password.data)
+        staff = Staff(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.address.data,create_staff_form.role.data,create_staff_form.password.data)
         add_staff(staff)
-        print(staff.get_first_name(), staff.get_last_name(), "was stored in customer.db successfully with user_id ==",
+        print(staff.get_first_name(), staff.get_last_name(), "was stored in customer.db successfully with staff_id ==",
               staff.get_user_id())
 
         return redirect(url_for('retrieveStaff'))
@@ -83,6 +83,7 @@ def update_staff(id):
         staff.set_first_name(update_staff_form.first_name.data)
         staff.set_last_name(update_staff_form.last_name.data)
         staff.set_email(update_staff_form.email.data)
+        staff.set_date_joined(update_staff_form.address.data)
         db['Staff'] = staff_dict
         db.close()
         return redirect(url_for('retrieveStaff'))

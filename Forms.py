@@ -17,7 +17,7 @@ class CreateStaffForm(Form):
     gender = SelectField('Gender', [validators.DataRequired()], choices=[('', 'Select'), ('F', 'Female'), ('M', 'Male')], default='')
     email = EmailField('Email', [validators.Email(), validators.DataRequired()])
     address = TextAreaField('Mailing Address', [validators.length(max=200), validators.DataRequired()])
-    membership = RadioField('Membership', choices=[('F', 'Fellow'), ('S', 'Senior'), ('P', 'Professional')], default='F')
+    role = RadioField('Role', choices=[('F', 'Fellow'), ('S', 'Senior'), ('P', 'Professional')], default='F')
     remarks = TextAreaField('Remarks', [validators.Optional()])
     password = PasswordField('Password', [validators.length(min=5, max=15), validators.data_required()])
 

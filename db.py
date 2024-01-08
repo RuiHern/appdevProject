@@ -1,4 +1,3 @@
-from User import User
 import shelve
 
 
