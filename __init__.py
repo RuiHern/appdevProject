@@ -10,16 +10,24 @@ app = Flask(__name__,static_url_path='/static')
 def home():
     return render_template('home.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    # create_login_form = logininformation(request.form)
+    # if request.method == 'POST' and create_login_form.validate():
+    #     check = logincheck(create_login_form.email2.data,create_login_form.password2.data)
+    #     check.logincheckfunc2()
+    #
+    # else:
+    #     check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
+    #     check.logincheckfunc()
+    # return render_template('login.html', form=create_login_form)
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
-        check = logincheck(create_login_form.email2.data,create_login_form.password2.data)
-        check.logincheckfunc2()
-        return redirect(url_for('createCustomer'))
-    else:
-        check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
-        check.logincheckfunc()
+        customer = logincheck(logininformation.email.data,logininformation.password.data)
+        customer.logincheckfunc()
+
+
+        return redirect(url_for('retrieveCustomers'))
     return render_template('login.html', form=create_login_form)
 
 

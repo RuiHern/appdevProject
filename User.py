@@ -43,9 +43,9 @@ class User:
         self.__password = password
 
 class logincheck:
-    def __init__(self,email2,password2):
+    def __init__(self, email2, password2):
         User.count_id += 1
-
+        # , email2, password2
         # self.__email2 = email2
         # self.__password2 = password2
         self.__email2 = "awdawda"
