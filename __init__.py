@@ -49,11 +49,10 @@ def login():
     # return render_template('login.html', form=create_login_form)
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
-        customer = logincheck(logininformation.email.data,logininformation.password.data)
-        customer.logincheckfunc()
+        customer = logincheck(logininformation.email.data, logininformation.password.data)
+        customer.email_set(logininformation.email.data)
+        print(customer.email_get())
 
-
-        return redirect(url_for('retrieveCustomers'))
     return render_template('login.html', form=create_login_form)
 
 
@@ -128,6 +127,13 @@ def update_user(id):
 # @app.route('login')
 # def login():
 #
+
+@app.route('/CreateForum.html', methods=['GET', 'POST'])
+def CreateForum():
+    users_dict = {}
+    db = shelve.open('user.db', 'r')
+    users_dict = db['Users']
+    db.close()
 
 
 
