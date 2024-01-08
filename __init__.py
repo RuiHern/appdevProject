@@ -6,10 +6,10 @@ from Staff import Staff
 from User import *
 from db import *
 
-UPLOAD_FOLDER = '/Uploads'
 app = Flask(__name__, static_url_path='/static')
+UPLOAD_FOLDER = '/Uploads'
 app.config['SECRET_KEY'] = 'supersecretkey'
-app.config['UPLOAD_FOLDER'] = 'C:\\Users\\Ervin\\Desktop\\appdevProject\\Upload'
+app.config['UPLOAD_FOLDER'] = 'C:\\RH stuff\\appdevProject2\\static\\Upload'
 app.config['SHELVE_DB'] = 'blog.db'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -187,6 +187,8 @@ def update_user(id):
 # @app.route('login')
 # def login():
 #
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -205,6 +207,38 @@ def save_data_to_shelve(Name):
     db['blog'] = blog_dict
     # Test codes
     db.close()
+
+
+def get_filenames(directory_path):
+    if os.path.exists(directory_path):
+        return os.listdir(directory_path)
+    else:
+        print(f"The directory '{directory_path}' does not exist.")
+        return []
+
+
+
+@app.route("/RetrieveForum", methods=['GET', 'POST'])
+def retrieve():
+    # Get the list of filenames from the upload folder
+    if request.method == 'POST':
+        print("Form submitted successfully!")
+
+    blog_dict = {}
+    db = shelve.open('blog.db', 'r')
+    blog_dict = db['Blog']
+    db.close()
+    filenames = get_filenames(app.config['UPLOAD_FOLDER'])
+
+    blog_list = []
+    for key in blog_dict:
+        current_blog = blog_dict.get(key)
+        blog_list.append(current_blog)
+
+    # Pass the list of filenames and blog_list to the HTML template
+    return render_template('RetrieveForum.html',count=len(blog_list), filenames=filenames, blog_list=blog_list)
+
+
 
 @app.route("/CreateForum", methods={'GET', 'POST'})
 def UploadImage():
@@ -227,16 +261,12 @@ def UploadImage():
             save_data_to_shelve(name)
 
             flash('Image Successfully uploaded and displayed below')
-            return render_template('home.html', filename=filename)
+            return render_template('RetrieveForum.html', filename=filename)
         else:
             flash('Allowed image types are - png, jpg, jpeg, gif')
             return redirect(url_for('CreateForum'))
 
     return render_template('CreateForum.html', form=blog)
-
-@app.route('/display/<filename>')
-def display_image(filename):
-    return redirect(url_for('Upload', filename='upload/' + filename), code=301)
 
 
 if __name__ == '__main__':

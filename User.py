@@ -68,6 +68,7 @@ class logincheck:
 
 class blog(User):
     def __init__(self, Name, Comment, File):
+        User.count_id += 1
         self.__name = Name
         self.__comment = Comment
         self.__file = File
@@ -92,3 +93,5 @@ class blog(User):
 
     def set_file(self, file):
         self.__file = file
+
+
