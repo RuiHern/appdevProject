@@ -64,3 +64,4 @@ class logincheck:
 
     def email_set(self):
         pass
+
