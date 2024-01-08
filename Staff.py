@@ -4,7 +4,7 @@ class Staff(User.User):
     count_id = 0
 
     def __init__(self, first_name, last_name, gender, membership, remarks, email, date_joined, address):
-        super().__init__(first_name, last_name, gender, membership)
+        super().__init__(first_name, last_name, gender, membership, remarks)
         Staff.count_id += 1
         self.__staff_id = Staff.count_id
         self.__email = email
