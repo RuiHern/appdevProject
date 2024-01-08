@@ -23,10 +23,18 @@ def login():
     # return render_template('login.html', form=create_login_form)
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
-        customer = logincheck(logininformation.email.data, logininformation.password.data)
-        customer.email_set(logininformation.email.data)
+        customer = logincheck(request.form['email'], request.form['password'])
+        customer.email_set(request.form['email'])
         print(customer.email_get())
+        users_dict = {}
+        db = shelve.open('user.db', 'r')
+        users_dict = db['Users']
 
+        if customer.email_get()  in users_dict:
+            # if customer.password_get() = user_dict
+            print(users_dict)
+
+            db.close()
     return render_template('login.html', form=create_login_form)
 
 
