@@ -1,76 +1,31 @@
 {% extends "base.html" %}
-{% block title %}Library Loan System - Retrieve Users{% endblock %}
+{% block title %}Retrieve Blog{% endblock %}
 {% block content %}
-<h1 class="display-4">Retrieve blog</h1>
-<div>
+  <h1 class="display-4">Retrieve Blog</h1>
+  <div>
     {% if count == 0 %}
-    <p>There are no blog.</p>
-    {% elif count == 1 %}
-    <p>There is 1 user.</p>
+      <p>No blog entries found.</p>
     {% else %}
-    <p>There are {{ count }} blog.</p>
-    {% endif %}
-</div>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endwith %}
-<div>
-    <table class="table table-striped">
+      <p>There are {{ count }} blog entries.</p>
+      <table class="table table-striped">
         <thead>
-        <tr>
+          <tr>
             <th>Blog ID</th>
             <th>Name</th>
             <th>Comment</th>
             <th>Image</th>
-        </tr>
+          </tr>
         </thead>
         <tbody>
-        {% for blog in blog_list %}
-        <tr>
-            <td>{{ blog.get_Name() }}</td>
-            <td>{{ blog.get_Comment() }}</td>
-            <td><img src="{{ url_for('static', filename='uploads/' + blog.get_File()) }}" alt="Blog Image"></td>
-            <td><a href="/updateCustomer/{{user.get_user_id()}}" class="btn btn-warning">Update</a></td>
-            <td>
-                <form action="{{url_for('deleteCustomer', id=user.get_user_id())}}" method="POST"
-                      enctype="multipart/form-data">
-                    <div class="modal" id="myModal_{{user.get_user_id()}}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Delete Confirmation</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    Are you sure you want to delete user.get_user_id() and user.get_first_name()?
-                                </div>
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <input type="submit" value="Delete" class="btn btn-danger">
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#myModal_{{user.get_user_id()}}">
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-
-            </td>
-        </tr>
-
-        {% endfor %}
+          {% for blog in blog_list %}
+            <tr>
+              <td>{{ blog.get_Name() }}</td>
+              <td>{{ blog.get_Comment() }}</td>
+              <td><img src="{{ url_for('static', filename='uploads/' + blog.get_File()) }}" alt="Blog Image"></td>
+            </tr>
+          {% endfor %}
         </tbody>
-    </table>
-</div>
+      </table>
+    {% endif %}
+  </div>
 {% endblock %}

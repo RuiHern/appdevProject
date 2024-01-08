@@ -193,18 +193,20 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def save_data_to_shelve(Name):
+def save_data_to_shelve(name, comment, file):
     blog_dict = {}
     db = shelve.open('blog.db', 'c')
+
     try:
         blog_dict = db['blog']
     except:
-        print("Error in retrieving Users from user.db.")
+        print("Error in retrieving blog from blog.db.")
 
-    blog_instance = blog(Name, None, None)
+    blog_instance = blog(name, comment, file)
     blog_instance.set_name(get_key(blog_dict))
     blog_dict[blog_instance.get_Name()] = blog_instance
     db['blog'] = blog_dict
+
     # Test codes
     db.close()
 
@@ -218,25 +220,19 @@ def get_filenames(directory_path):
 
 
 
-@app.route("/RetrieveForum", methods=['GET', 'POST'])
+
+
+@app.route("/RetrieveForum")
 def retrieve():
-    # Get the list of filenames from the upload folder
-    if request.method == 'POST':
-        print("Form submitted successfully!")
-
     blog_dict = {}
-    db = shelve.open('blog.db', 'r')
-    blog_dict = db['Blog']
-    db.close()
-    filenames = get_filenames(app.config['UPLOAD_FOLDER'])
+    try:
+        with shelve.open('blog.db', 'r') as db:
+            blog_dict = db.get('blog', {})
+    except Exception as e:
+        print(f"Error retrieving blog data: {e}")
 
-    blog_list = []
-    for key in blog_dict:
-        current_blog = blog_dict.get(key)
-        blog_list.append(current_blog)
-
-    # Pass the list of filenames and blog_list to the HTML template
-    return render_template('RetrieveForum.html',count=len(blog_list), filenames=filenames, blog_list=blog_list)
+    blog_list = list(blog_dict.values())
+    return render_template('RetrieveForum.html', count=len(blog_list), blog_list=blog_list)
 
 
 
@@ -258,7 +254,7 @@ def UploadImage():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             name = request.form.get('Name')
             comment = request.form.get('Comment')
-            save_data_to_shelve(name)
+            save_data_to_shelve(name,comment, filename)
 
             flash('Image Successfully uploaded and displayed below')
             return render_template('RetrieveForum.html', filename=filename)
