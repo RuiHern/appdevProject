@@ -1,4 +1,4 @@
-from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators
+from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, SubmitField
 from wtforms.fields import EmailField, DateField, PasswordField
 from flask_wtf import *
 from flask_wtf.file import FileField, FileRequired, FileAllowed
@@ -26,6 +26,10 @@ class DocumentUploadForm(Form):
     Name = StringField('Name', validators=[DataRequired()])
     Comment = StringField('Comment', validators=[DataRequired()])
     Image = FileField('Image', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
+
+class UploadFileForm(FlaskForm):
+    file = FileField("Upload",validators=[DataRequired()])
+    submit = SubmitField("Upload")
 
 class CreateProject(Form):
     

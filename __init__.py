@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
+
 from Forms import *
 from Staff import Staff
 from User import *
@@ -36,10 +38,14 @@ def login():
     return render_template('login.html', form=create_login_form)
 
 
+@app.route("/CreateForum.html" , methods = {'GET','POST'})
+def UploadImage():
+    form = UploadImage()
+    if form.validate_on_submit():
+        file = form.file.data
+        file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
 
-@app.route('/contactUs')
-def contact_us():
-    return render_template('contactUs.html')
+
 
 @app.route('/viewproject')
 def view_project():
@@ -207,8 +213,9 @@ def UploadImage():
         file = form.file.data
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
 
-    return render_template("CreateForum.html", form = form)
 
+
+    return render_template("CreateForum.html", form = form)
 
 if __name__ == '__main__':
     app.run(debug=True)
