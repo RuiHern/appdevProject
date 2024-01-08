@@ -110,6 +110,13 @@ def update_user(id):
 # def login():
 #
 
+@app.route('/CreateForum.html', methods=['GET', 'POST'])
+def CreateForum():
+    users_dict = {}
+    db = shelve.open('user.db', 'r')
+    users_dict = db['Users']
+    db.close()
+
 
 
 if __name__ == '__main__':
