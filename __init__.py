@@ -31,10 +31,10 @@ def login():
         users_dict = db['Users']
         if customer.email_get() in users_dict:
             user = users_dict.get(customer.email_get())
-            print('phase1')
+
             if customer.password_get() == user.get_password():
                 return redirect(url_for('retrieveCustomers'))
-                print('phase2')
+
         db.close()
 
 
