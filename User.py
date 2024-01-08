@@ -81,11 +81,14 @@ class blog(User):
     def get_File(self):
         return self.__file
 
-    def set(self, name):
-        self.__name = name
+    def set_name(self, name):
+        if name is not None:
+            self.__name = name
+        else:
+            print("Invalid name provided.")
 
-    def set(self, comment):
+    def set_comment(self, comment):
         self.__comment = comment
 
-    def set(self, file):
+    def set_file(self, file):
         self.__file = file

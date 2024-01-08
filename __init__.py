@@ -1,5 +1,3 @@
-import os
-
 from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import *
 
@@ -11,7 +9,8 @@ from db import *
 UPLOAD_FOLDER = '/Uploads'
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'supersecretkey'
-app.config['UPLOAD_FOLDER'] = 'Upload'
+app.config['UPLOAD_FOLDER'] = 'C:\\Users\\Ervin\\Desktop\\appdevProject\\Upload'
+app.config['SHELVE_DB'] = 'blog.db'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -192,41 +191,48 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def save_data_to_shelve(Name):
+    blog_dict = {}
+    db = shelve.open('blog.db', 'c')
+    try:
+        blog_dict = db['blog']
+    except:
+        print("Error in retrieving Users from user.db.")
+
+    blog_instance = blog(Name, None, None)
+    blog_instance.set_name(get_key(blog_dict))
+    blog_dict[blog_instance.get_Name()] = blog_instance
+    db['blog'] = blog_dict
+    # Test codes
+    db.close()
+
 @app.route("/CreateForum", methods={'GET', 'POST'})
 def UploadImage():
-    # blog_form = DocumentUploadForm(request.form)
-    # if request.method == 'POST' and blog_form.validate():
-    #     blogger = blog(blog_form.Name.data,blog_form.Comment.data,blog_form.file.data)
-    #     add_user(blogger)
-    #     print(cblogger.get_first_name(), blogger.get_last_name(),
-    #           "was stored in customer.db successfully with user_id ==",
-    #           blogger.get_user_id())
-    #
-    #     return redirect(url_for('retrieveCustomers'))
-    # return render_template('createCustomer.html', form= blog_form)
     blog = DocumentUploadForm(request.form)
-    if blog.validate():
-        if request.method == 'POST':
-            if 'file' not in request.files:
-                flash('No file part')
-                return redirect(url_for('retrieveCustomers'))
+    if request.method == 'POST':
+        file = request.files.get('file')
+        if not file:
+            flash('No file part')
+            return redirect(url_for('retrieveCustomers'))
 
-            file = request.files['file']
-            if file.filename == '':
-                flash('No image selected for uploading')
-                return redirect(request.url)
+        if file.filename == '':
+            flash('No image selected for uploading')
+            return redirect(request.url)
 
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                flash('Image Successfully uploaded and displayed below')
-                return render_template('CreateForum.html', filename=filename)
-            else:
-                flash('Allowed image types are - png, jpg, jpeg, gif')
-                return redirect(url_for('CreateForum'))
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            name = request.form.get('Name')
+            comment = request.form.get('Comment')
+            save_data_to_shelve(name)
+
+            flash('Image Successfully uploaded and displayed below')
+            return render_template('home.html', filename=filename)
+        else:
+            flash('Allowed image types are - png, jpg, jpeg, gif')
+            return redirect(url_for('CreateForum'))
 
     return render_template('CreateForum.html', form=blog)
-
 
 @app.route('/display/<filename>')
 def display_image(filename):
@@ -234,5 +240,4 @@ def display_image(filename):
 
 
 if __name__ == '__main__':
-    app.secret_key = 'supersecretkey'
     app.run(debug=True)

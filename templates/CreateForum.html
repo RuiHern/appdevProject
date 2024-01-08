@@ -4,18 +4,8 @@
 
 {% block content %}
 <h2>Create a Forum Post</h2>
-<form action="{{ url_for('UploadImage') }}" enctype="multipart/form-data" method="POST">
-    {{ form.hidden_tag() }}
-    {{ render_field(form.Name) }}
-    {{ render_field(form.Comment) }}
-    {{ render_field(form.file) }}
-    {{ render_field(form.submit) }}
-
-</form>
-
-<p>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
 <ul>
     {% for message in messages %}
     <li>{{ message }}</li>
@@ -23,8 +13,16 @@
 </ul>
 {% endif %}
 {% endwith %}
+<form action="{{ url_for('UploadImage') }}" enctype="multipart/form-data" method="POST">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.Name) }}
+    {{ render_field(form.Comment) }}
+    {{ render_field(form.file) }}
+    {{ render_field(form.submit) }}
+</form>
 
-</p>
+
+
 
 {% if filename %}
 <!-- Your code for displaying the uploaded file goes here -->
