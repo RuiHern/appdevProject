@@ -44,8 +44,6 @@ class User:
 
 class logincheck:
     def __init__(self, email2, password2):
-        User.count_id += 1
-
         self.__email2 = email2
         self.__password2 = password2
 
@@ -60,5 +58,5 @@ class logincheck:
     def password_get(self):
         return self.__password2
 
-    def email_set(self):
-        pass
+    def email_set(self,email2):
+        self.__email2 = email2
