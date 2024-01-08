@@ -21,6 +21,7 @@ def login():
     #     check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
     #     check.logincheckfunc()
     # return render_template('login.html', form=create_login_form)
+    print("bobby")
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
         customer = logincheck(logininformation.email.data, logininformation.password.data)
