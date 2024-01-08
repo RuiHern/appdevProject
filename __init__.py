@@ -21,7 +21,7 @@ def login():
     #     check = logincheck(create_login_form.email2.data, create_login_form.password2.data)
     #     check.logincheckfunc()
     # return render_template('login.html', form=create_login_form)
-
+    print("bobby")
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
         customer = logincheck(request.form['email'],logininformation.password.data)
@@ -42,10 +42,11 @@ def contact_us():
 def create_staff():
     create_staff_form = CreateStaffForm(request.form)
     if request.method == 'POST' and create_staff_form.validate():
-        staff = Staff(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.address.data,create_staff_form.password.data)
+        staff = Staff(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.address.data,create_staff_form.role.data,create_staff_form.password.data)
         add_staff(staff)
         print(staff.get_first_name(), staff.get_last_name(), "was stored in customer.db successfully with staff_id ==",
-              staff.get_staff_id())
+              staff.get_user_id())
+
         return redirect(url_for('retrieveStaff'))
     return render_template('createStaff.html', form=create_staff_form)
 @app.route('/retrieveStaff')

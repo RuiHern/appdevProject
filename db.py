@@ -1,3 +1,4 @@
+from User import User
 import shelve
 
 
@@ -7,20 +8,6 @@ def get_key(my_dict):
     else:
         my_key = max(my_dict.keys()) + 1
     return my_key
-
-def add_staff(staff):
-    staff_dict = {}
-    db = shelve.open('staff.db', 'c')
-    try:
-        staff_dict = db['Staff']
-    except:
-        print("Error in retrieving staff from staff.db.")
-
-    staff.set_user_id(get_key(staff_dict))
-    staff_dict[staff.get_email()] = staff
-    db['Staff'] = staff_dict
-    # Test codes
-    db.close()
 def add_user(user):
     users_dict = {}
     db = shelve.open('user.db', 'c')

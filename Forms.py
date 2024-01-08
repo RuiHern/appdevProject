@@ -16,7 +16,7 @@ class CreateStaffForm(Form):
     last_name = StringField('Last Name', [validators.Length(min=1, max=150), validators.DataRequired()])
     email = EmailField('Email', [validators.Email(), validators.DataRequired()])
     address = TextAreaField('Mailing Address', [validators.length(max=200), validators.DataRequired()])
-    # role = RadioField('Role', choices=[('F', 'Fellow'), ('S', 'Senior'), ('P', 'Professional')], default='F')
+    role = RadioField('Role', choices=[('F', 'Fellow'), ('S', 'Senior'), ('P', 'Professional')], default='F')
     password = PasswordField('Password', [validators.length(min=5, max=15), validators.data_required()])
 
 class logininformation(Form):
