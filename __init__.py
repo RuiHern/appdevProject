@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Forms import CreateUserForm, CreateCustomerForm , logininformation
+from Forms import *
 import shelve, Staff
 from db import *
 from User import *
@@ -23,10 +23,11 @@ def login():
     # return render_template('login.html', form=create_login_form)
     create_login_form = logininformation(request.form)
     if request.method == 'POST' and create_login_form.validate():
-        customer = logincheck(logininformation.email.data, logininformation.password.data)
-        customer.email_set(logininformation.email.data)
-        print(customer.email_get())
+        customer = logincheck(request.form['email'],logininformation.password.data)
+        customer.logincheckfunc()
 
+
+        return redirect(url_for('retrieveCustomers'))
     return render_template('login.html', form=create_login_form)
 
 
@@ -35,6 +36,69 @@ def login():
 def contact_us():
     return render_template('contactUs.html')
 
+
+@app.route('/createStaff', methods=['GET', 'POST'])
+def create_staff():
+    create_staff_form = CreateStaffForm(request.form)
+    if request.method == 'POST' and create_staff_form.validate():
+        staff = User(create_staff_form.first_name.data, create_staff_form.last_name.data,create_staff_form.email.data,create_staff_form.gender.data,create_staff_form.email.data,create_staff_form.address.data,create_staff_form.membership.data,create_staff_form.remarks.data,create_staff_form.password.data)
+        add_staff(staff)
+        print(staff.get_first_name(), staff.get_last_name(), "was stored in customer.db successfully with user_id ==",
+              staff.get_user_id())
+
+        return redirect(url_for('retrieveStaff'))
+    return render_template('createStaff.html', form=create_staff_form)
+@app.route('/retrieveStaff')
+def retrievestaff():
+    staff_dict = {}
+    db = shelve.open('staff.db', 'r')
+    staff_dict = db['Staff']
+    db.close()
+
+    staff_list = []
+    for key in staff_dict:
+        staff = staff_dict.get(key)
+        staff.append(staff)
+
+    return render_template('retrieveCustomers.html', count=len(staff_list), users_list=staff_list)
+
+@app.route('/deleteStaff/<int:id>', methods=['POST'])
+def deletestaff(id):
+    staff_dict = {}
+    db = shelve.open('staff.db','w')
+    staff_dict = db['Staff']
+    staff_dict.pop(id)
+    db['Staff'] = staff_dict
+    db.close()
+    return redirect(url_for('retrieveStaff'))
+
+@app.route('/updateStaff/<int:id>/', methods=['GET', 'POST'])
+def update_staff(id):
+    update_staff_form = CreateStaffForm(request.form)
+    if request.method == 'POST' and update_staff_form.validate():
+        staff_dict = {}
+        db = shelve.open('staff.db', 'w')
+        staff_dict = db['Staff']
+        staff = staff_dict.get(id)
+        staff.set_first_name(update_staff_form.first_name.data)
+        staff.set_last_name(update_staff_form.last_name.data)
+        staff.set_email(update_staff_form.email.data)
+        db['Staff'] = staff_dict
+        db.close()
+        return redirect(url_for('retrieveStaff'))
+    else:
+        staff_dict = {}
+        db = shelve.open('staff.db', 'r')
+        staff_dict = db['Staff']
+        db.close()
+
+        staff = staff_dict.get(id)
+        update_staff_form.first_name.data = staff.get_first_name()
+        update_staff_form.last_name.data = staff.get_last_name()
+        update_staff_form.email.data = staff.get_email()
+        update_staff_form.password.data = staff.get_password()
+
+        return render_template('updateCustomer.html', form=update_staff_form)
 
 @app.route('/createCustomer', methods=['GET', 'POST'])
 def create_customer():
